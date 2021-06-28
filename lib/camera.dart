@@ -358,7 +358,7 @@ class CameraController extends ValueNotifier<CameraValue> {
     }
     try {
       _creatingCompleter = Completer<void>();
-      final Map<String, dynamic> reply =
+      final Map<String, dynamic>? reply =
           await (_channel.invokeMapMethod<String, dynamic>(
         'initialize',
         <String, dynamic>{
@@ -369,15 +369,15 @@ class CameraController extends ValueNotifier<CameraValue> {
           'enableAudio': enableAudio,
           'enableAndroidOpenGL': androidUseOpenGL ?? false
         },
-      ) as FutureOr<Map<String, dynamic>>);
-      _textureId = reply['textureId'];
+      ));
+      _textureId = reply?['textureId'];
       value = value.copyWith(
         isInitialized: true,
         previewSize: Size(
-          reply['previewWidth'].toDouble(),
-          reply['previewHeight'].toDouble(),
+          reply?['previewWidth'].toDouble(),
+          reply?['previewHeight'].toDouble(),
         ),
-        previewQuarterTurns: reply['previewQuarterTurns'],
+        previewQuarterTurns: reply?['previewQuarterTurns'],
       );
     } on PlatformException catch (e) {
       throw CameraException(e.code, e.message);
