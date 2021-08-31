@@ -367,7 +367,7 @@ class CameraController extends ValueNotifier<CameraValue> {
           'streamingPreset':
               serializeResolutionPreset(streamingPreset ?? resolutionPreset),
           'enableAudio': enableAudio,
-          'enableAndroidOpenGL': androidUseOpenGL ?? false
+          'enableAndroidOpenGL': androidUseOpenGL
         },
       ));
       _textureId = reply?['textureId'];
