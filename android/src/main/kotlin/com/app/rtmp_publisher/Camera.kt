@@ -67,7 +67,7 @@ class Camera(
     private val maxRetries = 3
     private var currentRetries = 0
     private var publishUrl: String? = null
-    private val aspectRatio: Double = 4.0 / 5.0
+    private val aspectRatio: Double = 9.0 / 16.0
 
 //    private val glView: FlutterGLSurfaceView
     private val glView: LightOpenGlView

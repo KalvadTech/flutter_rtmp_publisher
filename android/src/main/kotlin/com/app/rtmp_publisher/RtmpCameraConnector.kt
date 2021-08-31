@@ -151,7 +151,7 @@ class RtmpCameraConnector(val context: Context, val useOpenGL: Boolean, val isPo
      */
     fun prepareVideo(width: Int, height: Int, fps: Int, bitrate: Int, hardwareRotation: Boolean,
                      rotation: Int, aspectRatio: Double): Boolean {
-        return prepareVideo(512, 640, fps, bitrate, hardwareRotation, 2, rotation, aspectRatio = aspectRatio)
+        return prepareVideo(width, height, fps, bitrate, hardwareRotation, 2, rotation, aspectRatio = aspectRatio)
     }
 
     private fun prepareGlInterface(rotation: Int, aspectRatio: Double) {
