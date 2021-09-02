@@ -405,6 +405,13 @@ class CameraController extends ValueNotifier<CameraValue> {
     await _channel.invokeMethod<void>('prepareForVideoRecording');
   }
 
+  /// Switch Camera
+  ///
+  /// Throws a [CameraException] if the prepare fails.
+  Future<void> switchCamera() async {
+    await _channel.invokeMethod<void>('switchCamera');
+  }
+
   /// Prepare the capture session for video streaming.
   ///
   /// Use of this method is optional, but it may be called for performance
