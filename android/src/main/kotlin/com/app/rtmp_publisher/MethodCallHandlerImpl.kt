@@ -68,6 +68,10 @@ internal class MethodCallHandlerImpl(
                 // This optimization is not required for Android.
                 result.success(null)
             }
+            "switchCamera" -> {
+                Log.i("Stuff", "switchCamera")
+                camera?.switchCamera(result)
+            }
             "startVideoRecording" -> {
                 Log.i("Stuff", "startVideoRecording")
                 camera?.startVideoRecording(call.argument("filePath")!!, result)

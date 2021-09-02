@@ -118,6 +118,10 @@ class MethodCallHandlerImplNew(
                 Log.i("Stuff", "stopRecording")
                 getCameraView()?.stopVideoRecording(result)
             }
+            "switchCamera" -> {
+                Log.i("Stuff", "switchCamera")
+                getCameraView()?.switchCamera(result)
+            }
             "stopStreaming" -> {
                 Log.i("Stuff", "stopStreaming")
                 getCameraView()?.stopVideoStreaming(result)

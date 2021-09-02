@@ -195,7 +195,16 @@ class CameraNativeView(
             result.error("stopVideoRecordingFailed", e.message, null)
         }
     }
-
+    fun switchCamera(result: MethodChannel.Result) {
+        try {
+            rtmpCamera.switchCamera()
+            result.success(null)
+        } catch (e: CameraAccessException) {
+            result.error("videoStreamingFailed", e.message, null)
+        } catch (e: IOException) {
+            result.error("videoStreamingFailed", e.message, null)
+        }
+    }
     fun stopVideoStreaming(result: MethodChannel.Result) {
         try {
             rtmpCamera.apply {

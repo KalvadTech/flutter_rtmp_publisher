@@ -463,6 +463,20 @@ class Camera(
         }
     }
 
+    fun switchCamera(result: MethodChannel.Result) {
+        Log.i("Camera", "switchCamera")
+
+        if (rtmpCamera == null) {
+            result.success(null)
+            return
+        }
+        if (rtmpCamera != null) {
+            rtmpCamera!!.switchCamera()
+        }
+        result.success(null)
+        return
+    }
+
     fun stopVideoStreaming(result: MethodChannel.Result) {
         Log.i("Camera", "stopVideoRecording")
 
