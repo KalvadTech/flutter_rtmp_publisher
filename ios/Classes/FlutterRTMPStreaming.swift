@@ -128,6 +128,11 @@ public class FlutterRTMPStreaming : NSObject {
     }
     
     @objc
+    public func switchCamera(device:AVCaptureDevice ) {
+        rtmpStream.attachCamera(device)
+    }
+
+    @objc
     public func isPaused() -> Bool{
         return rtmpStream.paused
     }

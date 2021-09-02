@@ -221,6 +221,7 @@ FlutterStreamHandler>
 - (void)startVideoRecordingAndStreamingAtUrl:(NSString *)url bitrate:(NSNumber *)bitrate filePath:(NSString *) result:(FlutterResult)result;
 - (void)startImageStreamWithMessenger:(NSObject<FlutterBinaryMessenger> *)messenger;
 - (void)stopImageStream;
+- (void)switchCamera;
 - (void)captureToFile:(NSString *)filename result:(FlutterResult)result;
 @end
 
@@ -822,6 +823,22 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     }
 }
 
+- (void)switchCamera {
+
+    AVCaptureDeviceDiscoverySession *discoverySession = [AVCaptureDeviceDiscoverySession
+                                                             discoverySessionWithDeviceTypes:@[ AVCaptureDeviceTypeBuiltInWideAngleCamera ]
+                                                             mediaType:AVMediaTypeVideo
+                                                             position:AVCaptureDevicePositionUnspecified];
+    NSArray<AVCaptureDevice *> *devices = discoverySession.devices;
+    for (AVCaptureDevice *device in devices) {
+        if ([device uniqueID] != [_captureDevice uniqueID]){
+            _captureDevice = device;
+            [_rtmpStream switchCamera:device];
+            return;
+        }
+    }
+}
+
 - (void)stopVideoRecordingWithResult:(FlutterResult)result {
     if (!_isRecording) {
         NSError *error =
@@ -1097,6 +1114,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         result(nil);
     } else if ([@"stopImageStream" isEqualToString:call.method]) {
         [_camera stopImageStream];
+        result(nil);
+    } else if ([@"switchCamera" isEqualToString:call.method]) {
+        [_camera switchCamera];
         result(nil);
     } else if ([@"pauseVideoRecording" isEqualToString:call.method]) {
         [_camera pauseVideoRecording];
